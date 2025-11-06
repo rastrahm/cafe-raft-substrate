@@ -17,8 +17,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CommandSerdesImpl implements CommandSerdes {
 
-    private static final Map<Integer, Class<? extends Command>> COMMAND_TYPES = Map.of(0, CreateBalanceCommand.class, 1,
-            DepositCommand.class, 2, WithdrawCommand.class, 3, TransferCommand.class, 4, BatchBalanceCommand.class);
+    private static final Map<Integer, Class<? extends Command>> COMMAND_TYPES = Map.of(
+        0, CreateBalanceCommand.class,
+        1, DepositCommand.class,
+        2, WithdrawCommand.class,
+        3, TransferCommand.class,
+        4, BatchBalanceCommand.class,
+        5, DeployContractCommand.class,
+        6, InvokeContractCommand.class,
+        7, DeployWasmContractCommand.class
+    );
     private final        ObjectMapper                           objectMapper;
 
     @Override

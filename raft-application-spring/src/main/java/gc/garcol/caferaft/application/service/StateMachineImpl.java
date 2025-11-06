@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 public class StateMachineImpl implements StateMachine {
 
     private final BalanceStateMachine balanceStateMachine;
+    private final ContractEngine      contractEngine;
 
     @Override
     public void load() {
@@ -44,6 +45,17 @@ public class StateMachineImpl implements StateMachine {
                                 transferCommand.amount());
                 case BatchBalanceCommand batchBalanceCommand -> {
                     return balanceStateMachine.batch(batchBalanceCommand);
+                }
+                case DeployContractCommand deployContractCommand -> {
+                    contractEngine.deploy(deployContractCommand.name(), deployContractCommand.className());
+                }
+                case InvokeContractCommand invokeContractCommand -> {
+                    Object result = contractEngine.invoke(invokeContractCommand.name(),
+                            invokeContractCommand.method(), invokeContractCommand.args());
+                    return new CommandResponse(HttpStatus.OK.value(), String.valueOf(result));
+                }
+                case DeployWasmContractCommand deployWasmContractCommand -> {
+                    contractEngine.deployWasm(deployWasmContractCommand.name(), deployWasmContractCommand.wasmBase64());
                 }
                 default -> {
                     return new CommandResponse(HttpStatus.BAD_REQUEST.value(), "Command not found!!");
