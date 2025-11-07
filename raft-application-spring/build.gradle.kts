@@ -45,6 +45,6 @@ dependencies {
     // Netty DNS resolver for macOS
     implementation("io.netty:netty-resolver-dns-native-macos:4.1.107.Final:osx-aarch_64")
 
-    // WASM runtime (pendiente de integración de proveedor específico)
-    // Implementa WasmRuntime concreto cuando definas el runtime (Wasmtime/Wasmer)
+    // WASM runtime (Wasmtime-Java desde JAR local)
+    implementation(files("$projectDir/libs/wasmtime-java-0.18.0.jar"))
 }

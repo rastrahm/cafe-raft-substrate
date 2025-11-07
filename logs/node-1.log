@@ -1,4 +1,4 @@
-Starting a Gradle Daemon, 1 busy and 2 stopped Daemons could not be reused, use --status for details
+Starting a Gradle Daemon, 2 busy and 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
 > Task :raft-core:compileJava UP-TO-DATE
 > Task :raft-core:processResources NO-SOURCE
 > Task :raft-core:classes UP-TO-DATE
@@ -23,62 +23,243 @@ Starting a Gradle Daemon, 1 busy and 2 stopped Daemons could not be reused, use 
 
  :: Spring Boot ::                (v3.5.0)
 
-2025-11-06T13:25:17.227Z  INFO 119371 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Starting CafeRaftApplication using Java 21.0.8 with PID 119371 (/home/rolando/Programacion/raft/cafe-raft/raft-application-spring/build/classes/java/main started by rolando in /home/rolando/Programacion/raft/cafe-raft/raft-application-spring)
-2025-11-06T13:25:17.228Z  INFO 119371 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : The following 1 profile is active: "rpc-rest"
-2025-11-06T13:25:17.629Z  INFO 119371 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
-2025-11-06T13:25:17.633Z  INFO 119371 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
-2025-11-06T13:25:18.073Z  INFO 119371 --- [cafe-raft] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
-2025-11-06T13:25:18.278Z  INFO 119371 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
-2025-11-06T13:25:18.279Z  INFO 119371 --- [cafe-raft] [           main] o.s.i.channel.PublishSubscribeChannel    : Channel 'cafe-raft.errorChannel' has 1 subscriber(s).
-2025-11-06T13:25:18.279Z  INFO 119371 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
-2025-11-06T13:25:18.319Z  INFO 119371 --- [cafe-raft] [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8081 (http)
-2025-11-06T13:25:18.324Z  INFO 119371 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Started CafeRaftApplication in 1.284 seconds (process running for 1.397)
-2025-11-06T13:25:18.325Z  INFO 119371 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Starting Node-1
-2025-11-06T13:25:18.325Z  INFO 119371 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loading segments
-2025-11-06T13:25:18.327Z  INFO 119371 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loaded segments
-2025-11-06T13:25:18.350Z  INFO 119371 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Node-1 started
-2025-11-06T13:25:18.350Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:18.399Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:18.499Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:18.556Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:18.657Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:18.774Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:18.874Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:18.951Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:19.052Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:19.148Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:19.248Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:19.385Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:19.485Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:19.546Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:19.647Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:19.742Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:19.842Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:19.948Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:20.048Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:20.164Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:20.264Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:20.394Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:20.494Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:20.546Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:20.647Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:20.765Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-06T13:25:20.865Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-06T13:25:21.053Z  INFO 119371 --- [cafe-raft] [       Thread-3] g.g.c.c.service.ClusterRpcHandlerImpl    : Received votes from majority of nodes, become LEADER
+2025-11-07T17:35:59.962Z  INFO 316781 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Starting CafeRaftApplication using Java 21.0.8 with PID 316781 (/home/rolando/Programacion/raft/cafe-raft/raft-application-spring/build/classes/java/main started by rolando in /home/rolando/Programacion/raft/cafe-raft/raft-application-spring)
+2025-11-07T17:35:59.963Z  INFO 316781 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : The following 1 profile is active: "rpc-rest"
+2025-11-07T17:36:00.396Z  INFO 316781 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2025-11-07T17:36:00.401Z  INFO 316781 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2025-11-07T17:36:00.989Z  INFO 316781 --- [cafe-raft] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2025-11-07T17:36:01.191Z  INFO 316781 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2025-11-07T17:36:01.191Z  INFO 316781 --- [cafe-raft] [           main] o.s.i.channel.PublishSubscribeChannel    : Channel 'cafe-raft.errorChannel' has 1 subscriber(s).
+2025-11-07T17:36:01.191Z  INFO 316781 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2025-11-07T17:36:01.239Z  INFO 316781 --- [cafe-raft] [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8081 (http)
+2025-11-07T17:36:01.244Z  INFO 316781 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Started CafeRaftApplication in 1.484 seconds (process running for 1.619)
+2025-11-07T17:36:01.246Z  INFO 316781 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Starting Node-1
+2025-11-07T17:36:01.246Z  INFO 316781 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loading segments
+2025-11-07T17:36:01.249Z  INFO 316781 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loaded segments
+2025-11-07T17:36:01.275Z  INFO 316781 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Node-1 started
+2025-11-07T17:36:01.275Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
+2025-11-07T17:36:01.429Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
+2025-11-07T17:36:01.529Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
+2025-11-07T17:36:01.552Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.c.service.ClusterRpcHandlerImpl    : Received append-log, convert to FOLLOWER
+2025-11-07T17:36:01.630Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): wasm-min - null
 
-> Task :raft-application-spring:bootRun FAILED
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
 
-FAILURE: Build failed with an exception.
+2025-11-07T17:36:01.632Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
 
-* What went wrong:
-Execution failed for task ':raft-application-spring:bootRun'.
-> Process 'command '/usr/lib/jvm/java-21-openjdk-amd64/bin/java'' finished with non-zero exit value 137
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
 
-* Try:
-> Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
+2025-11-07T17:36:01.633Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
 
-BUILD FAILED in 15m 48s
-9 actionable tasks: 1 executed, 8 up-to-date
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.634Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.634Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.635Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.636Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple-valid - null
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.636Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): add - null
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.637Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): add-valid - null
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.637Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): add-valid2 - null
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
+	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:34) ~[main/:na]
+	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:45) ~[main/:na]
+	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
+	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
+	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
+	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	... 10 common frames omitted
+
+2025-11-07T17:36:01.638Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.639Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.640Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.640Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.641Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.641Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.642Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.642Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.642Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.642Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.643Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.643Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.643Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.643Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.644Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.645Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.645Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.646Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.646Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.647Z  INFO 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (Engine almacenado)
+2025-11-07T17:36:01.647Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
+2025-11-07T17:36:01.647Z  WARN 316781 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.

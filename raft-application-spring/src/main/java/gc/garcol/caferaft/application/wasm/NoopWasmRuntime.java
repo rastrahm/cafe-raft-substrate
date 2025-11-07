@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
  * Permite compilar el proyecto sin dependencias nativas; cuando se
  * integre un runtime real, se reemplaza este bean.
  */
-@Primary
 @Component
 public class NoopWasmRuntime implements WasmRuntime {
     @Override
