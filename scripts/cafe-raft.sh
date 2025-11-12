@@ -131,7 +131,7 @@ start_nodes() {
 
   for idx in 0 1 2; do
     local port="${http_ports[$idx]}"
-    local args=("--cluster.properties.nodeId=$idx" "--server.port=$port")
+    local args=("--cluster.properties.nodeId=$idx" "--server.port=$port" "--spring.aot.enabled=false")
     local profile=""
 
     if [[ "$mode" == "udp" ]]; then

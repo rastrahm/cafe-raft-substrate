@@ -48,3 +48,9 @@ dependencies {
     // WASM runtime (Wasmtime-Java desde JAR local)
     implementation(files("$projectDir/libs/wasmtime-java-0.18.0.jar"))
 }
+
+tasks.configureEach {
+    if (name.contains("Aot")) {
+        enabled = false
+    }
+}

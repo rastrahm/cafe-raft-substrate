@@ -34,3 +34,6 @@ cluster.properties:
   messageBatchSize: 5000
   commitedLogBatchSize: 10000
   appendLogBatchSize: 200
+
+---
+wasm.storage.dir: ${project.root:./storage}/wasm

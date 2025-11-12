@@ -39,9 +39,6 @@ public class ContractEngine {
     }
 
     public void deployWasm(String name, String wasmBase64) {
-        // Registrar el módulo en el WasmEngine y envolverlo como Contract
-        // Nota: no ejecuta nada todavía (stub)
-        // Guardamos un contrato que delega al motor WASM para futuras invocaciones
         wasmEngine.deploy(name, wasmBase64);
         contractRegistry.register(name, new WasmContract(name, wasmEngine));
     }
