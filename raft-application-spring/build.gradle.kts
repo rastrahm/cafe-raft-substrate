@@ -47,10 +47,16 @@ dependencies {
 
     // WASM runtime (Wasmtime-Java desde JAR local)
     implementation(files("$projectDir/libs/wasmtime-java-0.18.0.jar"))
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.configureEach {
     if (name.contains("Aot")) {
         enabled = false
     }
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

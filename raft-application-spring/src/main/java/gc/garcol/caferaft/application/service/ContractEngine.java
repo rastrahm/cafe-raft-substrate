@@ -42,6 +42,18 @@ public class ContractEngine {
         wasmEngine.deploy(name, wasmBase64);
         contractRegistry.register(name, new WasmContract(name, wasmEngine));
     }
+
+    public void registerWasmSubstrateAddress(String name, String address) {
+        wasmEngine.registerSubstrateAddress(name, address);
+    }
+
+    public void syncSubstrateContractState(String name, String method, String inputHex) {
+        wasmEngine.syncContractState(name, method, inputHex);
+    }
+
+    public WasmEngine.ContractState getSubstrateContractState(String name) {
+        return wasmEngine.getContractState(name);
+    }
 }
 
 

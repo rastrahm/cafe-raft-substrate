@@ -4,7 +4,7 @@
 set -e
 
 NODE_URL="${1:-http://localhost:8080}"
-WASM_FILE="${2:-/tmp/simple.wasm}"
+WASM_FILE="${2:-Counter.wasm}"
 
 echo "=== Ejemplo: Desplegar Contrato WASM ==="
 echo "Nodo: $NODE_URL"
@@ -31,7 +31,7 @@ with open('/tmp/simple.wasm', 'wb') as f:
     f.write(wasm)
 print("Módulo WASM generado: /tmp/simple.wasm")
 PYEOF
-    WASM_FILE="/tmp/simple.wasm"
+    WASM_FILE="Counter.wasm"
 fi
 
 WASM_BASE64=$(base64 -w 0 "$WASM_FILE")
@@ -54,17 +54,27 @@ if echo "$DEPLOY_RESPONSE" | grep -q '"code":200'; then
       grep -A 5 "DeployWasmContractCommand" | grep -A 3 "\"name\":\"$CONTRACT_NAME\"" | head -5)
     echo "$LOG_ENTRY"
     echo ""
-    echo "3. Intentando invocar (esperado: error de runtime no integrado)..."
+    echo "3. Intentando invocar (en modo standalone)..."
     INVOKE_RESPONSE=$(curl -s -X POST "$NODE_URL/contracts/invoke" \
       -H "Content-Type: application/json" \
       -d "{\"name\":\"$CONTRACT_NAME\",\"method\":\"add\",\"args\":{\"a\":10,\"b\":25}}")
     echo "Respuesta: $INVOKE_RESPONSE"
     echo ""
-    echo "✅ Flujo completo verificado"
+    echo "✅ Flujo standalone verificado"
     echo ""
-    echo "Nota: El runtime WASM aún no está integrado."
-    echo "      El contrato está desplegado y registrado en el log de Raft,"
-    echo "      pero la ejecución requiere integrar un runtime WASM."
+    cat <<'NOTE'
+ℹ️  Si `substrate.enabled=true` y `substrate.auto-deploy=true`, este mismo comando
+    sube el WASM al nodo Substrate mediante `contracts_instantiateWithCode` y
+    registra la dirección automáticamente (revisa logs/node-0.log).
+    Si prefieres controlar el despliegue manualmente (auto-deploy=false), usa:
+         curl -X POST $NODE_URL/contracts/wasm/register-address \
+              -H "Content-Type: application/json" \
+              -d '{"name":"<alias>","address":"0x..."}'
+    Luego invoca pasando la llamada SCALE en hex:
+         curl -X POST $NODE_URL/contracts/invoke \
+              -H "Content-Type: application/json" \
+              -d '{"name":"<alias>","method":"call","args":{"__inputHex":"0x...","__origin":"//Alice"}}'
+NOTE
 else
     echo "❌ Error al desplegar contrato"
     exit 1

@@ -1,0 +1,15 @@
+WARNING: No public address specified, validator node may not be reachable.
+				Consider setting `--public-addr` to the public IP address of this node.
+				This will become a hard requirement in future versions.
+WARNING: No public address specified, validator node may not be reachable.
+				Consider setting `--public-addr` to the public IP address of this node.
+				This will become a hard requirement in future versions.
+2025-11-17 10:38:08.956  INFO main sc_cli::runner: Substrate Contracts Node    
+2025-11-17 10:38:08.957  INFO main sc_cli::runner: ✌️  version 0.42.0-f209befc88c    
+2025-11-17 10:38:08.957  INFO main sc_cli::runner: ❤️  by anonymous, 2021-2025    
+2025-11-17 10:38:08.957  INFO main sc_cli::runner: 📋 Chain specification: Development    
+2025-11-17 10:38:08.957  INFO main sc_cli::runner: 🏷  Node name: next-seat-1630    
+2025-11-17 10:38:08.957  INFO main sc_cli::runner: 👤 Role: AUTHORITY    
+2025-11-17 10:38:08.957  INFO main sc_cli::runner: 💾 Database: RocksDb at /tmp/substratedAittQ/chains/dev/db/full    
+2025-11-17 10:38:10.024  WARN main sc_service::config: Using default protocol ID "sup" because none is configured in the chain specs    
+2025-11-17 10:38:10.035  INFO main sc_rpc_server: Running JSON-RPC server: addr=0.0.0.0:9944,[::]:44173    

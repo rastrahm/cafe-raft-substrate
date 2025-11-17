@@ -3,6 +3,8 @@ package gc.garcol.caferaft.application.service;
 import gc.garcol.caferaft.application.payload.command.*;
 import gc.garcol.caferaft.application.payload.query.BalanceQuery;
 import gc.garcol.caferaft.application.payload.query.BalanceQueryResponse;
+import gc.garcol.caferaft.application.payload.query.ContractStateQuery;
+import gc.garcol.caferaft.application.payload.query.ContractStateQueryResponse;
 import gc.garcol.caferaft.core.client.*;
 import gc.garcol.caferaft.core.service.StateMachine;
 import lombok.RequiredArgsConstructor;
@@ -54,9 +56,15 @@ public class StateMachineImpl implements StateMachine {
                             invokeContractCommand.method(), invokeContractCommand.args());
                     return new CommandResponse(HttpStatus.OK.value(), String.valueOf(result));
                 }
-                case DeployWasmContractCommand deployWasmContractCommand -> {
-                    contractEngine.deployWasm(deployWasmContractCommand.name(), deployWasmContractCommand.wasmBase64());
-                }
+                case DeployWasmContractCommand deployWasmContractCommand ->
+                        contractEngine.deployWasm(deployWasmContractCommand.name(),
+                                deployWasmContractCommand.wasmBase64());
+                case RegisterWasmSubstrateAddressCommand registerWasmSubstrateAddressCommand ->
+                        contractEngine.registerWasmSubstrateAddress(registerWasmSubstrateAddressCommand.name(),
+                                registerWasmSubstrateAddressCommand.address());
+                case SyncSubstrateContractStateCommand syncCommand ->
+                        contractEngine.syncSubstrateContractState(syncCommand.contractName(),
+                                syncCommand.method(), syncCommand.inputHex());
                 default -> {
                     return new CommandResponse(HttpStatus.BAD_REQUEST.value(), "Command not found!!");
                 }
@@ -74,6 +82,18 @@ public class StateMachineImpl implements StateMachine {
                 var balance = balanceStateMachine.getBalance(balanceQuery.id());
                 yield BalanceQueryResponse.builder().id(balance.getId()).amount(balance.getAmount())
                         .active(balance.isActive()).build();
+            }
+            case ContractStateQuery contractStateQuery -> {
+                var state = contractEngine.getSubstrateContractState(contractStateQuery.contractName());
+                if (state == null) {
+                    yield new CommonErrorResponse(404, "Estado no sincronizado para: " + contractStateQuery.contractName());
+                }
+                yield new ContractStateQueryResponse(
+                        state.contractName(),
+                        state.stateHex(),
+                        state.lastSyncTimestamp(),
+                        state.lastBlockNumber()
+                );
             }
             default -> new CommonErrorResponse(404, String.format("Query Not Found %s", query));
         };

@@ -37,3 +37,14 @@ cluster.properties:
 
 ---
 wasm.storage.dir: ${project.root:./storage}/wasm
+
+---
+substrate:
+  enabled: true
+  rpc-url: http://127.0.0.1:9944
+  default-origin: //Alice
+  default-gas-limit: 500000000000
+  default-storage-deposit-limit: 0
+  auto-deploy: true
+  auto-sync-after-invoke: true  # Sincronizar estado automáticamente después de cada invocación
+  sync-method: get  # Método por defecto para sincronizar estado (usado si el método invocado no es de lectura)

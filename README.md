@@ -22,7 +22,9 @@ Plataforma de experimentación con Raft que soporta contratos en Java y WebAssem
 2. **Raft Application (Spring Boot)**: expone API REST y orquesta despliegues/invocaciones.
 3. **Soporte de contratos**:
    - Java (sigue disponible).
-   - WebAssembly vía **Solidity → Solang → Wasmtime-Java**.
+   - WebAssembly:
+     - **Standalone**: módulos sin imports (Wasmtime-Java).
+     - **Modo Substrate**: contratos desplegados en `substrate-contracts-node` (auto o manualmente) e invocados vía RPC.
 
 ---
 
@@ -67,12 +69,30 @@ solang --version
    - Convierte a Base64.
    - Llama a `POST /contracts/wasm/deploy`.
    - Verifica en `/logs`.
-4. **Invocación** (curl):
+   - Si `substrate.auto-deploy=true` y el nodo Substrate está activo, este paso llama internamente a `contracts_instantiateWithCode` y persiste la dirección resultante.
+4. **Invocación (standalone)**:
    ```bash
    curl -X POST http://localhost:8080/contracts/invoke \
      -H "Content-Type: application/json" \
      -d '{"name":"contrato","method":"add","args":{"a":10,"b":25}}'
    ```
+
+5. **Modo Substrate (contratos “reales”)**
+   - Activa `substrate.enabled=true` y ejecuta `substrate-contracts-node --dev --tmp`.
+   - Con `substrate.auto-deploy=true` (valor por defecto) basta con `POST /contracts/wasm/deploy`: el backend sube el WASM con `contracts_instantiateWithCode`, obtiene la dirección y la guarda.
+   - Si necesitas control manual (constructor con args específicos, cuentas distintas, etc.), pon `substrate.auto-deploy=false`, despliega con `cargo contract` / Polkadot-JS y registra la dirección:
+     ```bash
+     curl -X POST http://localhost:8080/contracts/wasm/register-address \
+       -H "Content-Type: application/json" \
+       -d '{"name":"voting","address":"0x...."}'
+     ```
+   - Las invocaciones requieren el payload SCALE (`__inputHex`):
+     ```bash
+     curl -X POST http://localhost:8080/contracts/invoke \
+       -H "Content-Type: application/json" \
+       -d '{"name":"voting","method":"call","args":{"__inputHex":"0x...", "__origin":"//Alice","__value":0}}'
+     ```
+   - El backend delega en `contracts_call`; el estado del contrato permanece en el nodo Substrate.
 
 ---
 
@@ -107,8 +127,9 @@ El script lanza tres nodos (8080,8081,8082) y espera a que respondan.
 | `/swagger-ui/index.html` | GET | Documentación OpenAPI |
 | `/actuator/health` | GET | Health check |
 | `/logs` | GET | Log Raft |
-| `/contracts/wasm/deploy` | POST | Desplegar módulo WASM |
-| `/contracts/invoke` | POST | Invocar contrato (Java o WASM) |
+| `/contracts/wasm/deploy` | POST | Desplegar módulo WASM (local o Substrate) |
+| `/contracts/wasm/register-address` | POST | Asociar un contrato Raft con la dirección Substrate (si `substrate.auto-deploy=false`) |
+| `/contracts/invoke` | POST | Invocar contrato (Java, WASM standalone o Substrate `contracts_call`) |
 
 Ejemplo de despliegue manual:
 ```bash
@@ -151,9 +172,10 @@ raft-application-spring/
 
 - `examples/add.wat` y `examples/add.wasm`: contrato WASM mínimo.
 - `examples/test-wasm-contract.sh`: flujo end-to-end de prueba.
-- `examples/deploy-wasm-example.sh`: despliegue rápido.
+- `examples/deploy-wasm-example.sh`: despliegue rápido (detecta modo Substrate).
 - `arquitecture.md`: descripción detallada del sistema.
 - `deployment.md`: procedimientos extendidos.
+- `system_capabilities.md`: estado actualizado de la integración Substrate (`substrate.auto-deploy`, flujo RPC).
 
 ---
 

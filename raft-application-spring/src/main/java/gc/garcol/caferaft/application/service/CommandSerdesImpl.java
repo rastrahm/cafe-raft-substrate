@@ -25,7 +25,9 @@ public class CommandSerdesImpl implements CommandSerdes {
         4, BatchBalanceCommand.class,
         5, DeployContractCommand.class,
         6, InvokeContractCommand.class,
-        7, DeployWasmContractCommand.class
+        7, DeployWasmContractCommand.class,
+        8, RegisterWasmSubstrateAddressCommand.class,
+        9, SyncSubstrateContractStateCommand.class
     );
     private final        ObjectMapper                           objectMapper;
 

@@ -2,8 +2,8 @@
 > Task :raft-core:processResources NO-SOURCE
 > Task :raft-core:classes UP-TO-DATE
 > Task :raft-core:jar UP-TO-DATE
-> Task :raft-application-spring:compileJava
-> Task :raft-application-spring:processResources UP-TO-DATE
+> Task :raft-application-spring:compileJava UP-TO-DATE
+> Task :raft-application-spring:processResources
 > Task :raft-application-spring:classes
 > Task :raft-application-spring:resolveMainClassName
 > Task :raft-application-spring:processAot SKIPPED
@@ -22,330 +22,167 @@
 
  :: Spring Boot ::                (v3.5.0)
 
-2025-11-12T19:26:24.317Z  INFO 231333 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Starting CafeRaftApplication using Java 21.0.8 with PID 231333 (/home/rolando/Programacion/raft/cafe-raft/raft-application-spring/build/classes/java/main started by rolando in /home/rolando/Programacion/raft/cafe-raft/raft-application-spring)
-2025-11-12T19:26:24.318Z  INFO 231333 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : The following 1 profile is active: "rpc-rest"
-2025-11-12T19:26:24.669Z  INFO 231333 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
-2025-11-12T19:26:24.676Z  INFO 231333 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
-2025-11-12T19:26:25.025Z  INFO 231333 --- [cafe-raft] [           main] .a.c.DocumentSignerContractConfiguration : Registrando contrato documentSigner en ContractRegistry
-2025-11-12T19:26:25.187Z  INFO 231333 --- [cafe-raft] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
-2025-11-12T19:26:25.380Z  INFO 231333 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
-2025-11-12T19:26:25.380Z  INFO 231333 --- [cafe-raft] [           main] o.s.i.channel.PublishSubscribeChannel    : Channel 'cafe-raft.errorChannel' has 1 subscriber(s).
-2025-11-12T19:26:25.381Z  INFO 231333 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
-2025-11-12T19:26:25.421Z  INFO 231333 --- [cafe-raft] [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
-2025-11-12T19:26:25.426Z  INFO 231333 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Started CafeRaftApplication in 1.274 seconds (process running for 1.393)
-2025-11-12T19:26:25.427Z  INFO 231333 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Starting Node-0
-2025-11-12T19:26:25.428Z  INFO 231333 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loading segments
-2025-11-12T19:26:25.430Z  INFO 231333 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loaded segments
-2025-11-12T19:26:25.451Z  INFO 231333 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Node-0 started
-2025-11-12T19:26:25.452Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-12T19:26:25.690Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-12T19:26:25.759Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): wasm-min - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.761Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.761Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.762Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.763Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.764Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.764Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple-valid - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.764Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): add - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.764Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): add-valid - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.766Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): add-valid2 - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.769Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.770Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.772Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.772Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.772Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.772Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.773Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.773Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.773Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.774Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.774Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.774Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.775Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.775Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.775Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.776Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.777Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.777Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.778Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.778Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: add (41 bytes)
-2025-11-12T19:26:25.778Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.779Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.785Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Fallo precompilando WASM (continuando en stub): simple - null
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:118) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
-	at gc.garcol.caferaft.application.wasm.WasmtimeWasmRuntime.precompile(WasmtimeWasmRuntime.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.registerModuleInternal(WasmEngine.java:225) ~[main/:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.deploy(WasmEngine.java:62) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.deployWasm(ContractEngine.java:42) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:58) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: failed to parse WebAssembly module
-	at io.github.kawamuray.wasmtime.Module.newFromBinary(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Module.fromBinary(Module.java:23) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:25.788Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: contrato (37935 bytes)
-2025-11-12T19:26:25.788Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:25.788Z ERROR 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Error ejecutando WASM: contrato::add
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:74) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.invoke(WasmEngine.java:142) ~[main/:na]
-	at gc.garcol.caferaft.application.contract.WasmContract.invoke(WasmContract.java:19) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.invoke(ContractEngine.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:53) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: expected 8 imports, found 0
-	at io.github.kawamuray.wasmtime.Instance.newInstance(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Instance.<init>(Instance.java:19) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:26:49.874Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM precompilado: contrato (37935 bytes)
-2025-11-12T19:26:59.913Z  WARN 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : El Engine del Store no coincide con el Engine usado para precompilar. Esto puede causar errores.
-2025-11-12T19:26:59.913Z ERROR 231333 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Error ejecutando WASM: contrato::add
-
-java.lang.reflect.InvocationTargetException: null
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:74) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502) ~[na:na]
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486) ~[na:na]
-	at gc.garcol.caferaft.application.service.WasmEngine.invoke(WasmEngine.java:142) ~[main/:na]
-	at gc.garcol.caferaft.application.contract.WasmContract.invoke(WasmContract.java:19) ~[main/:na]
-	at gc.garcol.caferaft.application.service.ContractEngine.invoke(ContractEngine.java:38) ~[main/:na]
-	at gc.garcol.caferaft.application.service.StateMachineImpl.accept(StateMachineImpl.java:53) ~[main/:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.applyStateMachine(RaftLogicHandlerImpl.java:157) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.followerLogic(RaftLogicHandlerImpl.java:143) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftLogicHandlerImpl.apply(RaftLogicHandlerImpl.java:50) ~[raft-core.jar:na]
-	at gc.garcol.caferaft.core.service.RaftMessageCoordinator.doWork(RaftMessageCoordinator.java:56) ~[raft-core.jar:na]
-	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
-Caused by: io.github.kawamuray.wasmtime.WasmtimeException: expected 8 imports, found 0
-	at io.github.kawamuray.wasmtime.Instance.newInstance(Native Method) ~[wasmtime-java-0.18.0.jar:na]
-	at io.github.kawamuray.wasmtime.Instance.<init>(Instance.java:19) ~[wasmtime-java-0.18.0.jar:na]
-	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62) ~[na:na]
-	... 11 common frames omitted
-
-2025-11-12T19:30:28.183Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
-2025-11-12T19:30:28.346Z  INFO 231333 --- [cafe-raft] [       Thread-2] g.g.c.c.service.ClusterRpcHandlerImpl    : Detect higher term, convert to FOLLOWER
-2025-11-12T19:30:34.377Z  INFO 231333 --- [cafe-raft] [ionShutdownHook] g.g.c.core.service.ClusterBootstrap      : Node-0 stopping
-2025-11-12T19:30:34.379Z  INFO 231333 --- [cafe-raft] [ionShutdownHook] o.s.b.w.embedded.netty.GracefulShutdown  : Commencing graceful shutdown. Waiting for active requests to complete
-2025-11-12T19:30:34.380Z  INFO 231333 --- [cafe-raft] [ netty-shutdown] o.s.b.w.embedded.netty.GracefulShutdown  : Graceful shutdown complete
-2025-11-12T19:30:36.389Z  INFO 231333 --- [cafe-raft] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
-2025-11-12T19:30:36.389Z  INFO 231333 --- [cafe-raft] [ionShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'cafe-raft.errorChannel' has 0 subscriber(s).
-2025-11-12T19:30:36.389Z  INFO 231333 --- [cafe-raft] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
+2025-11-17T13:38:12.160Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Starting CafeRaftApplication using Java 21.0.8 with PID 105096 (/home/rolando/Programacion/raft/cafe-raft/raft-application-spring/build/classes/java/main started by rolando in /home/rolando/Programacion/raft/cafe-raft/raft-application-spring)
+2025-11-17T13:38:12.161Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : The following 1 profile is active: "rpc-rest"
+2025-11-17T13:38:12.643Z  INFO 105096 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2025-11-17T13:38:12.648Z  INFO 105096 --- [cafe-raft] [           main] faultConfiguringBeanFactoryPostProcessor : No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2025-11-17T13:38:12.944Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.a.substrate.SubstrateCapabilities  : Detectando capacidades del nodo Substrate...
+2025-11-17T13:38:12.987Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.a.substrate.SubstrateCapabilities  : Capacidades Substrate detectadas:
+2025-11-17T13:38:12.987Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.a.substrate.SubstrateCapabilities  :   - Métodos RPC contracts_*: false
+2025-11-17T13:38:12.987Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.a.substrate.SubstrateCapabilities  :   - contracts_instantiateWithCode: false
+2025-11-17T13:38:12.987Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.a.substrate.SubstrateCapabilities  :   - contracts_call: false
+2025-11-17T13:38:12.987Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.a.substrate.SubstrateCapabilities  :   - contracts_uploadCode: false
+2025-11-17T13:38:12.987Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.a.substrate.SubstrateCapabilities  :   - Total métodos disponibles: 102
+2025-11-17T13:38:12.990Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): wasm-min (4 bytes)
+2025-11-17T13:38:12.990Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: wasm-min
+2025-11-17T13:38:12.990Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple-valid (41 bytes)
+2025-11-17T13:38:12.990Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: simple-valid
+2025-11-17T13:38:12.990Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-state-call (41 bytes)
+2025-11-17T13:38:12.990Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: test-state-call
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-substrate-v42 (41 bytes)
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: test-substrate-v42
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): contrato (37935 bytes)
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: contrato
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-detection-1763144733 (8 bytes)
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: test-detection-1763144733
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add-valid (41 bytes)
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: add-valid
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (37935 bytes)
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: simple
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): Counter (37935 bytes)
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: Counter
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-final (41 bytes)
+2025-11-17T13:38:12.991Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: test-final
+2025-11-17T13:38:12.992Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-capabilities (8 bytes)
+2025-11-17T13:38:12.992Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: test-capabilities
+2025-11-17T13:38:12.992Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:12.992Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: add
+2025-11-17T13:38:12.992Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add-valid2 (41 bytes)
+2025-11-17T13:38:12.992Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.service.WasmEngine     : Módulo WASM restaurado desde disco: add-valid2
+2025-11-17T13:38:13.063Z  INFO 105096 --- [cafe-raft] [           main] .a.c.DocumentSignerContractConfiguration : Registrando contrato documentSigner en ContractRegistry
+2025-11-17T13:38:13.226Z  INFO 105096 --- [cafe-raft] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2025-11-17T13:38:13.419Z  INFO 105096 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2025-11-17T13:38:13.419Z  INFO 105096 --- [cafe-raft] [           main] o.s.i.channel.PublishSubscribeChannel    : Channel 'cafe-raft.errorChannel' has 1 subscriber(s).
+2025-11-17T13:38:13.419Z  INFO 105096 --- [cafe-raft] [           main] o.s.i.endpoint.EventDrivenConsumer       : started bean '_org.springframework.integration.errorLogger'
+2025-11-17T13:38:13.468Z  INFO 105096 --- [cafe-raft] [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port 8080 (http)
+2025-11-17T13:38:13.474Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.application.CafeRaftApplication    : Started CafeRaftApplication in 1.581 seconds (process running for 1.743)
+2025-11-17T13:38:13.475Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Starting Node-0
+2025-11-17T13:38:13.475Z  INFO 105096 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loading segments
+2025-11-17T13:38:13.477Z  INFO 105096 --- [cafe-raft] [           main] gc.garcol.caferaft.core.log.LogManager   : Loaded segments
+2025-11-17T13:38:13.489Z  INFO 105096 --- [cafe-raft] [           main] g.g.c.core.service.ClusterBootstrap      : Node-0 started
+2025-11-17T13:38:13.489Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.core.service.RaftLogicHandlerImpl  : Election timeout, convert to CANDIDATE
+2025-11-17T13:38:18.246Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.c.service.ClusterRpcHandlerImpl    : Received votes from majority of nodes, become LEADER
+2025-11-17T13:38:18.276Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): wasm-min (4 bytes)
+2025-11-17T13:38:18.276Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.276Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.277Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (41 bytes)
+2025-11-17T13:38:18.277Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.277Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.277Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (41 bytes)
+2025-11-17T13:38:18.277Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.277Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.278Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (41 bytes)
+2025-11-17T13:38:18.278Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.278Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.278Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (41 bytes)
+2025-11-17T13:38:18.278Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.278Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.279Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (41 bytes)
+2025-11-17T13:38:18.279Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.279Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.279Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple-valid (41 bytes)
+2025-11-17T13:38:18.279Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.279Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.279Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.279Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.279Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.279Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add-valid (41 bytes)
+2025-11-17T13:38:18.280Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.280Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.280Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add-valid2 (41 bytes)
+2025-11-17T13:38:18.280Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.280Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.280Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.280Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.280Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.280Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.280Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.280Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.281Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.281Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.281Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.281Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.281Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.281Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.281Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.281Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.281Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.282Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.282Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.282Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.282Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.282Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.282Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.283Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.283Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.283Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.283Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.283Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.290Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (41 bytes)
+2025-11-17T13:38:18.290Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.290Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.293Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): contrato (37935 bytes)
+2025-11-17T13:38:18.293Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.293Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.295Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): contrato (37935 bytes)
+2025-11-17T13:38:18.295Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.295Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.296Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): add (41 bytes)
+2025-11-17T13:38:18.296Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.296Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.297Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (37935 bytes)
+2025-11-17T13:38:18.297Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.297Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.298Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): simple (37935 bytes)
+2025-11-17T13:38:18.298Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.298Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.298Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-state-call (41 bytes)
+2025-11-17T13:38:18.298Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.298Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-substrate-v42 (41 bytes)
+2025-11-17T13:38:18.299Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-capabilities (8 bytes)
+2025-11-17T13:38:18.299Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-detection-1763144733 (8 bytes)
+2025-11-17T13:38:18.299Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-final (41 bytes)
+2025-11-17T13:38:18.299Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.299Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.300Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-substrate-v42 (41 bytes)
+2025-11-17T13:38:18.300Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.300Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.300Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): test-substrate-v42 (41 bytes)
+2025-11-17T13:38:18.300Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.300Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:38:18.301Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : WASM almacenado en modo Substrate (sin precompilación): Counter (37935 bytes)
+2025-11-17T13:38:18.301Z  WARN 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : contracts_instantiateWithCode no disponible. Despliegue automático no soportado.
+2025-11-17T13:38:18.301Z  INFO 105096 --- [cafe-raft] [       Thread-2] g.g.c.application.service.WasmEngine     : Por favor, despliega el contrato manualmente y registra la dirección con POST /contracts/wasm/register-address
+2025-11-17T13:40:42.318Z  INFO 105096 --- [cafe-raft] [ionShutdownHook] g.g.c.core.service.ClusterBootstrap      : Node-0 stopping
+2025-11-17T13:40:42.319Z  INFO 105096 --- [cafe-raft] [ionShutdownHook] o.s.b.w.embedded.netty.GracefulShutdown  : Commencing graceful shutdown. Waiting for active requests to complete
+2025-11-17T13:40:42.320Z  INFO 105096 --- [cafe-raft] [ netty-shutdown] o.s.b.w.embedded.netty.GracefulShutdown  : Graceful shutdown complete
+2025-11-17T13:40:44.330Z  INFO 105096 --- [cafe-raft] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : Removing {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2025-11-17T13:40:44.330Z  INFO 105096 --- [cafe-raft] [ionShutdownHook] o.s.i.channel.PublishSubscribeChannel    : Channel 'cafe-raft.errorChannel' has 0 subscriber(s).
+2025-11-17T13:40:44.330Z  INFO 105096 --- [cafe-raft] [ionShutdownHook] o.s.i.endpoint.EventDrivenConsumer       : stopped bean '_org.springframework.integration.errorLogger'
 
 > Task :raft-application-spring:bootRun FAILED
 
@@ -361,5 +198,5 @@ Execution failed for task ':raft-application-spring:bootRun'.
 > Run with --scan to get full insights.
 > Get more help at https://help.gradle.org.
 
-BUILD FAILED in 4m 13s
+BUILD FAILED in 2m 33s
 6 actionable tasks: 3 executed, 3 up-to-date

@@ -1,9 +1,11 @@
 package gc.garcol.caferaft.application.network.rest;
 
 import gc.garcol.caferaft.application.payload.query.BalanceQuery;
+import gc.garcol.caferaft.application.payload.query.ContractStateQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -21,5 +23,10 @@ public class QueryController {
     @GetMapping("/balance/{id}")
     Mono<?> getBalance(ServerWebExchange request, @PathVariable Long id) {
         return Mono.fromFuture(requestDispatcher.dispatch(request, new BalanceQuery(id)));
+    }
+
+    @GetMapping("/contracts/wasm/state")
+    Mono<?> getContractState(ServerWebExchange request, @RequestParam String name) {
+        return Mono.fromFuture(requestDispatcher.dispatch(request, new ContractStateQuery(name)));
     }
 }
