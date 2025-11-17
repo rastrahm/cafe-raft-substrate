@@ -77,9 +77,9 @@ solang --version
      -d '{"name":"contrato","method":"add","args":{"a":10,"b":25}}'
    ```
 
-5. **Modo Substrate (contratos “reales”)**
-   - Activa `substrate.enabled=true` y ejecuta `substrate-contracts-node --dev --tmp`.
-   - Con `substrate.auto-deploy=true` (valor por defecto) basta con `POST /contracts/wasm/deploy`: el backend sube el WASM con `contracts_instantiateWithCode`, obtiene la dirección y la guarda.
+5. **Modo Substrate (contratos "reales")**
+   - Activa `substrate.enabled=true` y ejecuta `substrate-contracts-node --dev --tmp` (o usa `./scripts/cafe-raft.sh start-rest` que lo inicia automáticamente).
+   - Con `substrate.auto-deploy=true` (valor por defecto) basta con `POST /contracts/wasm/deploy`: el backend intenta subir el WASM con `contracts_instantiateWithCode` si está disponible, o guía al despliegue manual.
    - Si necesitas control manual (constructor con args específicos, cuentas distintas, etc.), pon `substrate.auto-deploy=false`, despliega con `cargo contract` / Polkadot-JS y registra la dirección:
      ```bash
      curl -X POST http://localhost:8080/contracts/wasm/register-address \
@@ -92,7 +92,21 @@ solang --version
        -H "Content-Type: application/json" \
        -d '{"name":"voting","method":"call","args":{"__inputHex":"0x...", "__origin":"//Alice","__value":0}}'
      ```
-   - El backend delega en `contracts_call`; el estado del contrato permanece en el nodo Substrate.
+   - El backend delega en `contracts_call` o `state_call` según disponibilidad; el estado del contrato permanece en el nodo Substrate.
+
+6. **Sincronización de Estado (Modo Substrate)**
+   - Con `substrate.auto-sync-after-invoke=true` (habilitado por defecto), después de cada invocación se sincroniza automáticamente el estado desde Substrate a Café Raft.
+   - Consulta el estado sincronizado:
+     ```bash
+     curl -X GET http://localhost:8080/contracts/wasm/state?name=voting
+     ```
+   - Sincronización manual:
+     ```bash
+     curl -X POST http://localhost:8080/contracts/wasm/sync-state \
+       -H "Content-Type: application/json" \
+       -d '{"contractName":"voting","method":"get","inputHex":"0x"}'
+     ```
+   - Ver documentación completa en `docs/substrate-state-sync.md`.
 
 ---
 
@@ -103,7 +117,11 @@ solang --version
 cd scripts
 ./cafe-raft.sh start-rest
 ```
-El script lanza tres nodos (8080,8081,8082) y espera a que respondan.
+El script lanza:
+- **Substrate contracts node** (puerto 9944) - se inicia automáticamente
+- **Tres nodos Café Raft** (puertos 8080, 8081, 8082) - espera a que respondan
+
+Para omitir Substrate: `START_SUBSTRATE=false ./cafe-raft.sh start-rest`
 
 ### Estado
 ```bash
@@ -129,6 +147,8 @@ El script lanza tres nodos (8080,8081,8082) y espera a que respondan.
 | `/logs` | GET | Log Raft |
 | `/contracts/wasm/deploy` | POST | Desplegar módulo WASM (local o Substrate) |
 | `/contracts/wasm/register-address` | POST | Asociar un contrato Raft con la dirección Substrate (si `substrate.auto-deploy=false`) |
+| `/contracts/wasm/sync-state` | POST | Sincronizar estado de contrato desde Substrate a Café Raft |
+| `/contracts/wasm/state` | GET | Consultar estado sincronizado de un contrato |
 | `/contracts/invoke` | POST | Invocar contrato (Java, WASM standalone o Substrate `contracts_call`) |
 
 Ejemplo de despliegue manual:
@@ -185,4 +205,34 @@ raft-application-spring/
 2. Añadir tests automáticos para despliegues WASM.
 3. Exponer endpoints complementarios (logs filtrados, métricas).
 4. Documentar front end / flujos UI.
+
+---
+
+## Agradecimientos
+
+### Café Raft
+
+Este proyecto está basado en **Café Raft**, una implementación en Java del algoritmo de consenso Raft desarrollada por **thaivc**.
+
+- **Repositorio**: [Café Raft](https://github.com/gc-garcol/cafe-raft)
+- **Autor**: thaivc
+- **Licencia**: Apache-2.0
+
+Café Raft proporciona la base sólida de consenso distribuido que permite a este proyecto gestionar comandos de forma consistente y tolerante a fallos.
+
+### Substrate Contracts Node
+
+La integración con contratos WebAssembly utiliza **substrate-contracts-node**, un nodo de Substrate configurado para ejecutar contratos inteligentes desarrollado por **Parity Technologies**.
+
+- **Repositorio**: [substrate-contracts-node](https://github.com/paritytech/substrate-contracts-node)
+- **Organización**: [Parity Technologies](https://www.parity.io/)
+- **Licencia**: Apache 2.0 / GPL 3.0 (dual license)
+
+Substrate-contracts-node permite ejecutar contratos WASM compilados con Solang que requieren las funciones host de Substrate (`seal_*`), proporcionando un entorno de ejecución completo para contratos de Polkadot/Substrate.
+
+### Otras tecnologías utilizadas
+
+- **Wasmtime-Java**: Bindings Java para Wasmtime (Bytecode Alliance)
+- **Solang**: Compilador Solidity → WebAssembly (Hyperledger)
+- **Spring Boot**: Framework de aplicación Java (VMware / Pivotal)
 
